@@ -1,0 +1,16 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: {{ cookiecutter.otp_app }}
+  description: |
+    {{ cookiecutter.description }}
+  annotations:
+    github.com/project-slug: {{ cookiecutter.destination.git.full_name }}
+    backstage.io/source-ref: {{ cookiecutter.storePath | jsonify }}
+    backstage.io/github-actions-id: {{ cookiecutter.storePath }}
+  tags: {{ cookiecutter.tags | jsonify }}
+spec:
+  type: service
+  lifecycle: experimental
+  owner: {{ cookiecutter.owner }}
+  system: {{ cookiecutter.system }}

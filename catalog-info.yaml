@@ -1,0 +1,32 @@
+apiVersion: backstage.io/v1alpha1
+kind: Template
+metadata:
+  name: elixir-library
+  title: Elixir Library
+  description:
+    Generic boilerplate for a Mix library
+  tags:
+    - recommended
+    - elixir
+    - library
+spec:
+  owner: team-baemax
+  templater: cookiecutter
+  type: library
+  path: '.'
+  schema:
+    required:
+      - otp_app
+      - description
+    properties:
+      otp_app:
+        title: OTP Application Name
+        type: string
+        description: >-
+          The Elixir OTP application name. Should be snake_case. For Haste
+          this is "haste".
+      description:
+        title: Description
+        type: string
+        description: >-
+          A brief description of the library. Around 40-80 characters will do.
