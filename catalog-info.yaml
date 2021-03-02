@@ -20,6 +20,9 @@ spec:
       - module_name
       - description
       - private
+      - system
+      - tags
+      - owner
     properties:
       otp_app:
         title: OTP Application Name
