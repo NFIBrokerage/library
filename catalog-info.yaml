@@ -17,6 +17,7 @@ spec:
   schema:
     required:
       - otp_app
+      - module_name
       - description
       - private
     properties:
@@ -26,6 +27,12 @@ spec:
         description: >-
           The Elixir OTP application name. Should be snake_case. For Haste
           this is "haste".
+      module_name:
+        title: Module Name
+        type: string
+        description: >-
+          The Elixir module name to use. Should be PascalCase. For Haste this
+          is "Haste".
       description:
         title: Description
         type: string
