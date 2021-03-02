@@ -3,7 +3,7 @@ name: Actions CI
 on: push
 
 env:
-  CUATRO_HEX_KEY: ${{ secrets.CUATRO_HEX_KEY }}
+  CUATRO_HEX_KEY: ${{ '{{' }} secrets.CUATRO_HEX_KEY {{ '}}' }}
 
 jobs:
   bless:
@@ -25,26 +25,26 @@ jobs:
     - name: Setup Elixir and Erlang versions
       uses: actions/setup-elixir@v1
       with:
-        elixir-version: ${{ env.ELIXIR_VERSION }}
-        otp-version: ${{ env.OTP_VERSION }}
+        elixir-version: ${{ '{{' }} env.ELIXIR_VERSION {{ '}}' }}
+        otp-version: ${{ '{{' }} env.OTP_VERSION {{ '}}' }}
 
     - name: Restore the deps cache
       uses: actions/cache@v1
       id: deps-cache
       with:
         path: deps
-        key: ${{ runner.os }}-${{ env.ELIXIR_VERSION }}-${{ env.OTP_VERSION }}-${{ env.MIX_ENV }}-deps-mixlockhash-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+        key: ${{ '{{' }} runner.os {{ '}}' }}-${{ '{{' }} env.ELIXIR_VERSION {{ '}}' }}-${{ '{{' }} env.OTP_VERSION {{ '}}' }}-${{ '{{' }} env.MIX_ENV {{ '}}' }}-deps-mixlockhash-${{ '{{' }} hashFiles(format('{0{{ '}}' }}1}', github.workspace, '/mix.lock')) }}
         restore-keys: |
-          ${{ runner.os }}-${{ env.ELIXIR_VERSION }}-${{ env.OTP_VERSION }}-${{ env.MIX_ENV }}-deps-
+          ${{ '{{' }} runner.os {{ '}}' }}-${{ '{{' }} env.ELIXIR_VERSION {{ '}}' }}-${{ '{{' }} env.OTP_VERSION {{ '}}' }}-${{ '{{' }} env.MIX_ENV {{ '}}' }}-deps-
 
     - name: Restore the _build cache
       uses: actions/cache@v1
       id: build-cache
       with:
         path: _build
-        key: ${{ runner.os }}-${{ env.ELIXIR_VERSION }}-${{ env.OTP_VERSION }}-${{ env.MIX_ENV }}-build-mixlockhash-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+        key: ${{ '{{' }} runner.os {{ '}}' }}-${{ '{{' }} env.ELIXIR_VERSION {{ '}}' }}-${{ '{{' }} env.OTP_VERSION {{ '}}' }}-${{ '{{' }} env.MIX_ENV {{ '}}' }}-build-mixlockhash-${{ '{{' }} hashFiles(format('{0{{ '}}' }}1}', github.workspace, '/mix.lock')) }}
         restore-keys: |
-          ${{ runner.os }}-${{ env.ELIXIR_VERSION }}-${{ env.OTP_VERSION }}-${{ env.MIX_ENV }}-build-
+          ${{ '{{' }} runner.os {{ '}}' }}-${{ '{{' }} env.ELIXIR_VERSION {{ '}}' }}-${{ '{{' }} env.OTP_VERSION {{ '}}' }}-${{ '{{' }} env.MIX_ENV {{ '}}' }}-build-
 
     - name: Fetch mix dependencies
       if: steps.deps-cache.outputs.cache-hit != 'true'
@@ -94,26 +94,26 @@ jobs:
     - name: Setup Elixir and Erlang versions
       uses: actions/setup-elixir@v1
       with:
-        elixir-version: ${{ env.ELIXIR_VERSION }}
-        otp-version: ${{ env.OTP_VERSION }}
+        elixir-version: ${{ '{{' }} env.ELIXIR_VERSION {{ '}}' }}
+        otp-version: ${{ '{{' }} env.OTP_VERSION {{ '}}' }}
 
     - name: Restore the deps cache
       uses: actions/cache@v1
       id: deps-cache
       with:
         path: deps
-        key: ${{ runner.os }}-${{ env.ELIXIR_VERSION }}-${{ env.OTP_VERSION }}-${{ env.MIX_ENV }}-deps-mixlockhash-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+        key: ${{ '{{' }} runner.os {{ '}}' }}-${{ '{{' }} env.ELIXIR_VERSION {{ '}}' }}-${{ '{{' }} env.OTP_VERSION {{ '}}' }}-${{ '{{' }} env.MIX_ENV {{ '}}' }}-deps-mixlockhash-${{ '{{' }} hashFiles(format('{0{{ '}}' }}1}', github.workspace, '/mix.lock')) }}
         restore-keys: |
-          ${{ runner.os }}-${{ env.ELIXIR_VERSION }}-${{ env.OTP_VERSION }}-${{ env.MIX_ENV }}-deps-
+          ${{ '{{' }} runner.os {{ '}}' }}-${{ '{{' }} env.ELIXIR_VERSION {{ '}}' }}-${{ '{{' }} env.OTP_VERSION {{ '}}' }}-${{ '{{' }} env.MIX_ENV {{ '}}' }}-deps-
 
     - name: Restore the _build cache
       uses: actions/cache@v1
       id: build-cache
       with:
         path: _build
-        key: ${{ runner.os }}-${{ env.ELIXIR_VERSION }}-${{ env.OTP_VERSION }}-${{ env.MIX_ENV }}-build-mixlockhash-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+        key: ${{ '{{' }} runner.os {{ '}}' }}-${{ '{{' }} env.ELIXIR_VERSION {{ '}}' }}-${{ '{{' }} env.OTP_VERSION {{ '}}' }}-${{ '{{' }} env.MIX_ENV {{ '}}' }}-build-mixlockhash-${{ '{{' }} hashFiles(format('{0{{ '}}' }}1}', github.workspace, '/mix.lock')) }}
         restore-keys: |
-          ${{ runner.os }}-${{ env.ELIXIR_VERSION }}-${{ env.OTP_VERSION }}-${{ env.MIX_ENV }}-build-
+          ${{ '{{' }} runner.os {{ '}}' }}-${{ '{{' }} env.ELIXIR_VERSION {{ '}}' }}-${{ '{{' }} env.OTP_VERSION {{ '}}' }}-${{ '{{' }} env.MIX_ENV {{ '}}' }}-build-
 
     - name: Fetch mix dependencies
       if: steps.deps-cache.outputs.cache-hit != 'true'
@@ -134,7 +134,7 @@ jobs:
 
     - name: Determine the tag version
       env:
-        GITHUB_REF: ${{ github.ref }}
+        GITHUB_REF: ${{ '{{' }} github.ref {{ '}}' }}
       run: echo "TAG=$(echo "$GITHUB_REF" | awk -F / '{print $3}')" >> $GITHUB_ENV
 
     - name: Write the tag version to .version
@@ -147,17 +147,17 @@ jobs:
       id: create_release
       uses: NFIBrokerage/create-release@v2
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ '{{' }} secrets.GITHUB_TOKEN {{ '}}' }}
       with:
-        tag_name: ${{ env.TAG }}
-        release_name: Release ${{ env.TAG }}
+        tag_name: ${{ '{{' }} env.TAG {{ '}}' }}
+        release_name: Release ${{ '{{' }} env.TAG {{ '}}' }}
         draft: false
         prerelease: false
 
     - name: Publish library
       run: mix hex.publish --yes {% if cookiecutter.private == "y" -%}--organization cuatro{%- endif %}
       env:
-        HEX_API_KEY: ${{ secrets.HEX_PUBLISH_KEY }}
+        HEX_API_KEY: ${{ '{{' }} secrets.HEX_PUBLISH_KEY {{ '}}' }}
 
     - name: Notify ops channel of build success
       run: >
@@ -167,4 +167,4 @@ jobs:
         -d "{\"text\":\":hexpm: package published for $REPOSITORY $(git tag -ln $TAG)\"}"
         $SLACK_WEBHOOK
       env:
-        SLACK_WEBHOOK: ${{ secrets.OPS_CHANNEL_SLACK_WEBHOOK }}
+        SLACK_WEBHOOK: ${{ '{{' }} secrets.OPS_CHANNEL_SLACK_WEBHOOK {{ '}}' }}

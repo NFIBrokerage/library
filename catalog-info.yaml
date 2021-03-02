@@ -49,3 +49,23 @@ spec:
           - "y"
           - "n"
         default: "y"
+      system:
+        title: System
+        type: string
+        description: >-
+          The system which the library serves. Should be an abstract concept
+          like "read-models" or "networking".
+      tags:
+        title: Tags
+        description: >-
+          A list of tags such as "ecto" or "phoenix" which will serve as short
+          descriptors and filter parameters for finding libraries in Backstage.
+        type: array
+        items:
+          type: string
+          format: "[a-z0-9]"
+      owner:
+        title: Owner
+        description: >-
+          The team which claims ownership over this library. E.g. for Haste
+          this would be "team-baemax".
