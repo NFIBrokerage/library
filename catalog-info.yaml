@@ -69,6 +69,7 @@ spec:
           format: "[a-z0-9]"
       owner:
         title: Owner
+        type: string
         description: >-
           The team which claims ownership over this library. E.g. for Haste
           this would be "team-baemax".
