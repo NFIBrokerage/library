@@ -18,6 +18,7 @@ spec:
     required:
       - otp_app
       - description
+      - private
     properties:
       otp_app:
         title: OTP Application Name
@@ -30,3 +31,14 @@ spec:
         type: string
         description: >-
           A brief description of the library. Around 40-80 characters will do.
+      private:
+        title: Private Library?
+        description: >-
+          Is this library for internal use only? Private libraries will be
+          configured to publish to our private Hex and use extra internal
+          dependencies like convene.
+        type: string
+        enum:
+          - "y"
+          - "n"
+        default: "y"
