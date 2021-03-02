@@ -49,11 +49,11 @@ defmodule {{ cookiecutter.module_name }}.MixProject do
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       # test
       {:bless, "~> 1.0"},
-{% if cookiecutter.private == "y" %}
+      {% if cookiecutter.private == "y" -%}
       {:convene, "~> 0.2", organization: "cuatro", only: [:dev, :test]},
-{% else %}
+      {% else %}
       {:credo, "~> 1.0", only: [:dev, :test]},
-{% endif %}
+      {% endif -%}
       {:excoveralls, "~> 0.7", only: :test}
     ]
   end
@@ -63,9 +63,9 @@ defmodule {{ cookiecutter.module_name }}.MixProject do
       name: "{{ cookiecutter.otp_app }}",
       files: ~w(lib .formatter.exs mix.exs README.md .version),
       licenses: [],
-{% if cookiecutter.private == "y" %}
+      {% if cookiecutter.private == "y" -%}
       organization: "cuatro",
-{% endif %}
+      {% endif -%}
       links: %{
         "GitHub" => @source_url,
         "CHANGELOG" => @source_url <> "/blobs/main/CHANGELOG.md"

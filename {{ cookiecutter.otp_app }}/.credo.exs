@@ -48,13 +48,13 @@
       #     {Credo.Check.Design.DuplicatedCode, false}
       #
       checks: [
-{% if cookiecutter.private == "y" %}
+        {% if cookiecutter.private == "y" -%}
         #
         ## Cuatro Checks
         #
         {Convene.Check.ModulenameMatchesFilename,
          excluded: [~r(test/support/)]},
-{% endif %}
+        {% endif -%}
 
         #
         ## Consistency Checks
