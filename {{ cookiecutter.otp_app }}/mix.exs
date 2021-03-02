@@ -47,7 +47,7 @@ defmodule {{ cookiecutter.module_name }}.MixProject do
       # docs
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       # test
-      {:bless, "~> 1.0"},
+      {:bless, "~> 1.0", only: [:dev, :test]},
       {% if cookiecutter.private == "y" -%}
       {:convene, "~> 0.2", organization: "cuatro", only: [:dev, :test]},
       {% else %}
