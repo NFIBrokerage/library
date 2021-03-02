@@ -6,8 +6,12 @@ echo "running NFIBrokerage/library::hooks/post_gen_project.sh"
 # - format
 # - get and lock deps
 
-echo "==> mix format"
-mix format
+{% if cookiecutter.private == "y" %}
+mix hex.organization auth cuatro --key $(cat /etc/cuatro_secrets/cuatro_hex_key.txt)
+{% endif %}
 
 echo "==> mix deps.get"
 mix deps.get
+
+echo "==> mix format"
+mix format
