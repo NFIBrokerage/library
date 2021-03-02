@@ -31,8 +31,7 @@ defmodule {{ cookiecutter.module_name }}.MixProject do
       description: description(),
       source_url: @source_url,
       name: "{{ cookiecutter.module_name }}",
-      docs: docs(),
-      aliases: aliases()
+      docs: docs()
     ]
   end
 
