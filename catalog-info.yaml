@@ -65,9 +65,7 @@ spec:
           descriptors and filter parameters for finding libraries in Backstage.
           Tags should be separated with commas and have no spaces. For Haste,
           this is "ecto,pagination,live-view".
-        type: array
-        items:
-          type: string
+        type: string
       owner:
         title: Owner
         type: string
