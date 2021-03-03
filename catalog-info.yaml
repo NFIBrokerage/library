@@ -63,10 +63,11 @@ spec:
         description: >-
           A list of tags such as "ecto" or "phoenix" which will serve as short
           descriptors and filter parameters for finding libraries in Backstage.
+          Tags should be separated with commas and have no spaces. For Haste,
+          this is "ecto,pagination,live-view".
         type: array
         items:
           type: string
-          format: "[a-z0-9]"
       owner:
         title: Owner
         type: string
