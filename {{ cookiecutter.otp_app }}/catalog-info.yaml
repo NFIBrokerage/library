@@ -8,7 +8,10 @@ metadata:
     github.com/project-slug: {{ cookiecutter.destination.git.full_name }}
     backstage.io/source-ref: {{ cookiecutter.storePath | jsonify }}
     backstage.io/github-actions-id: {{ cookiecutter.storePath }}
-  tags: {{ cookiecutter.tags }}
+  tags:
+{%- for tag in cookiecutter.tags.split(',') %}
+    - {{ tag -}}
+{% endfor %}
 spec:
   type: service
   lifecycle: experimental

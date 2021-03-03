@@ -3,7 +3,7 @@
   "module_name": "Haste",
   "description": "A framework for real-time",
   "private": "y",
-  "tags": ["realtime", "postgres"],
+  "tags": "realtime,postgres",
   "system": "read-models",
   "owner": "team-baemax",
   "storePath": "https://github.com/NFIBrokerage/haste",
