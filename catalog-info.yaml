@@ -1,113 +1,75 @@
-apiVersion: backstage.io/v1beta2
+apiVersion: backstage.io/v1alpha1
 kind: Template
 metadata:
   name: elixir-library
   title: Elixir Library
-  description: Generic boilerplate for a Mix library
+  description:
+    Generic boilerplate for a Mix library
   tags:
     - recommended
     - elixir
     - library
 spec:
   owner: team-baemax
+  templater: cookiecutter
   type: library
-  parameters:
-    - title: Fill out some metadata
-      required:
-        - otp_app
-        - description
-        - repoUrl
-        - system
-        - owner
-        - tags
-      properties:
-        otp_app:
-          title: Name
+  path: '.'
+  schema:
+    required:
+      - otp_app
+      - module_name
+      - description
+      - private
+      - system
+      - tags
+      - owner
+    properties:
+      otp_app:
+        title: OTP Application Name
+        type: string
+        description: >-
+          The Elixir OTP application name. Should be snake_case. For Haste
+          this is "haste".
+      module_name:
+        title: Module Name
+        type: string
+        description: >-
+          The Elixir module name to use. Should be PascalCase. For Haste this
+          is "Haste".
+      description:
+        title: Description
+        type: string
+        description: >-
+          A brief description of the library. Around 40-80 characters will do.
+      private:
+        title: Private Library?
+        description: >-
+          Is this library for internal use only? Private libraries will be
+          configured to publish to our private Hex and use extra internal
+          dependencies like convene.
+        type: string
+        enum:
+          - "y"
+          - "n"
+        default: "y"
+      system:
+        title: System
+        type: string
+        description: >-
+          The system which the library serves. Should be an abstract concept
+          like "read-models" or "networking".
+      tags:
+        title: Tags
+        description: >-
+          A list of tags such as "ecto" or "phoenix" which will serve as short
+          descriptors and filter parameters for finding libraries in Backstage.
+        type: array
+        items:
           type: string
-          description: Name of the library. Should be snake_case.
-          ui:autofocus: true
-        description:
-          title: Description
-          type: string
-          description: >-
-            A brief description of the library. Around 40-80 charaters.
-        repoUrl:
-          title: Repository
-          type: string
-          ui:field: RepoUrlPicker
-          ui:options:
-            allowHosts:
-              - github.com
-        system:
-          title: System
-          type: string
-          description: >-
-            The system or component the library feeds. Should be an abstract
-            concept like "read-models" or "networking".
-        owner:
-          title: Owner
-          type: string
-          description: >-
-            The team which claims ownership over this library. E.g. for Haste
-            this would be "team-baemax".
-        tags:
-          title: Tags
-          type: array
-          default: []
-          items:
-            type: string
-    - title: Info about the library
-      required:
-        - module_name
-      properties:
-        module_name:
-          title: Module Name
-          type: string
-          description: >-
-            The Elixir module name to use. Should be PascalCase. For Haste this
-            is "Haste".
-        private:
-          title: Private?
-          description: >-
-            Is this library for internal use only? Private libraries will be
-            configured to publish to our private Hex and use extra internal
-            dependencies like convene.
-          type: string
-          enum:
-            - "y"
-            - "n"
-          default: "y"
-  steps:
-    - id: generate
-      name: Generate template
-      action: fetch:cookiecutter
-      input:
-        url: "."
-        values:
-          otp_app: "{{ parameters.otp_app }}"
-          description: "{{ parameters.description }}"
-          repoUrl: "{{ parameters.repoUrl }}"
-          system: "{{ parameters.system }}"
-          owner: "{{ parameters.owner }}"
-          tags: "{{ parameters.tags }}"
-
-    - id: publish
-      name: Publish Generated Files to GitHub
-      action: publish:github
-      input:
-        allowedHosts:
-          - github.com
-        description: "{{ parameters.description }}"
-        repoUrl: "{{ parameters.repoUrl }}"
-        branch: main
-
-    - id: register
-      name: Register library in Catalog
-      action: catalog:register
-      input:
-        repoContentsUrl: "{{ steps.publish.output.repoContentsUrl }}"
-        catalogInfoPath: '/catalog-info.yaml'
-
-  output:
-    remoteUrl: "{{ steps.publish.output.remoteUrl }}"
-    entityRef: "{{ steps.register.output.entityRef }}"
+          format: "[a-z0-9]"
+      owner:
+        title: Owner
+        type: string
+        description: >-
+          The team which claims ownership over this library. E.g. for Haste
+          this would be "team-baemax".
