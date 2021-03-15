@@ -13,7 +13,7 @@ metadata:
     - {{ tag -}}
 {% endfor %}
 spec:
-  type: service
+  type: library
   lifecycle: experimental
   owner: {{ cookiecutter.owner }}
   system: {{ cookiecutter.system }}
