@@ -50,9 +50,8 @@ defmodule {{ cookiecutter.module_name }}.MixProject do
       {:bless, "~> 1.0", only: [:dev, :test]},
       {% if cookiecutter.private == "y" -%}
       {:convene, "~> 0.2", organization: "cuatro", only: [:dev, :test]},
-      {% else %}
-      {:credo, "~> 1.0", only: [:dev, :test]},
       {% endif -%}
+      {:credo, "~> 1.0", only: [:dev, :test]},
       {:excoveralls, "~> 0.7", only: :test}
     ]
   end
